@@ -60,7 +60,7 @@ export const iconSleep =
 
 const iconIncrease = (type: "mood" | "sleep") => {
     return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill={type === "mood" ? "currentColor" : "hsla(0, 0%, 100%, 0.7)"} viewBox="0 0 16 16"><path fill={type === "mood" ? "currentColor" : "hsla(0, 0%, 100%, 0.7)"} d="M3.415 3.36c-.021-.19.149-.36.36-.36h8.871c.212 0 .36.149.36.36v8.87c0 .213-.17.383-.36.361l-.828.022c-.212 0-.382-.17-.36-.361l-.022-6.6L4.2 12.89a.347.347 0 0 1-.509 0l-.594-.595a.365.365 0 0 1 0-.509l7.236-7.236H3.755c-.191.021-.361-.148-.361-.36l.021-.828Z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" className={`mt-1`} fill={type === "mood" ? "currentColor" : "hsla(0, 0%, 100%, 0.7)"} viewBox="0 0 16 16"><path fill={type === "mood" ? "currentColor" : "hsla(0, 0%, 100%, 0.7)"} d="M3.415 3.36c-.021-.19.149-.36.36-.36h8.871c.212 0 .36.149.36.36v8.87c0 .213-.17.383-.36.361l-.828.022c-.212 0-.382-.17-.36-.361l-.022-6.6L4.2 12.89a.347.347 0 0 1-.509 0l-.594-.595a.365.365 0 0 1 0-.509l7.236-7.236H3.755c-.191.021-.361-.148-.361-.36l.021-.828Z"/></svg>
     )
 }
 
@@ -68,13 +68,13 @@ const iconIncrease = (type: "mood" | "sleep") => {
 
 const iconSame = (type: "mood" | "sleep") => {
     return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" fill={type === "mood" ? "currentColor" :"hsla(0, 0%, 100%, 0.7)"} viewBox="0 0 15 16"><path fill={type === "mood" ? "currentColor" : "hsla(0, 0%, 100%, 0.7)"} d="M7.539 1.478c.12-.15.36-.15.51 0L14.32 7.75c.15.15.15.36 0 .51l-6.272 6.272c-.15.15-.39.15-.51 0l-.6-.57c-.15-.15-.15-.39 0-.51l4.65-4.682H1.357c-.21 0-.36-.15-.36-.36v-.84c0-.18.15-.36.36-.36H11.59L6.938 2.557c-.15-.12-.15-.36 0-.51l.6-.57Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" className={`mt-1`} fill={type === "mood" ? "currentColor" :"hsla(0, 0%, 100%, 0.7)"} viewBox="0 0 15 16"><path fill={type === "mood" ? "currentColor" : "hsla(0, 0%, 100%, 0.7)"} d="M7.539 1.478c.12-.15.36-.15.51 0L14.32 7.75c.15.15.15.36 0 .51l-6.272 6.272c-.15.15-.39.15-.51 0l-.6-.57c-.15-.15-.15-.39 0-.51l4.65-4.682H1.357c-.21 0-.36-.15-.36-.36v-.84c0-.18.15-.36.36-.36H11.59L6.938 2.557c-.15-.12-.15-.36 0-.51l.6-.57Z" /></svg>
 )
 }
 
 const iconDecrease = (type: "mood" | "sleep") => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill={type === "mood" ? "currentColor" : "hsla(0, 0%, 100%, 0.7)"} viewBox="0 0 16 16"><path fill={type === "mood" ? "currentColor" : "hsla(0, 0%, 100%, 0.7)"} d="M12.64 3.415c.19-.021.36.149.36.36v8.871c0 .212-.149.36-.36.36H3.77c-.213 0-.383-.17-.362-.36l-.02-.828c0-.212.169-.382.36-.36l6.6-.022L3.11 4.2a.347.347 0 0 1 0-.509l.595-.594a.365.365 0 0 1 .509 0l7.236 7.236V3.755c-.021-.191.149-.361.36-.361l.828.021Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" className={`mt-1`} fill={type === "mood" ? "currentColor" : "hsla(0, 0%, 100%, 0.7)"} viewBox="0 0 16 16"><path fill={type === "mood" ? "currentColor" : "hsla(0, 0%, 100%, 0.7)"} d="M12.64 3.415c.19-.021.36.149.36.36v8.871c0 .212-.149.36-.36.36H3.77c-.213 0-.383-.17-.362-.36l-.02-.828c0-.212.169-.382.36-.36l6.6-.022L3.11 4.2a.347.347 0 0 1 0-.509l.595-.594a.365.365 0 0 1 .509 0l7.236 7.236V3.755c-.021-.191.149-.361.36-.361l.828.021Z"/></svg>
 )
 }
 

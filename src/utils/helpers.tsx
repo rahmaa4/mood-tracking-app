@@ -44,7 +44,7 @@ export const calculateAverage = (arr:MoodEntries, type:"mood"|"sleep") => {
         averageMood = Math.round(averageMood / 5);
         return averageMood;
     } else {
-        averageSleep = Math.floor(averageSleep / 5);
+        averageSleep = Math.round(averageSleep / 5);
         return averageSleep;
     }
 }
@@ -62,11 +62,7 @@ export const calcPrevAverage = (arr: MoodEntries, type: "mood" | "sleep") => {
             }
         }
 
-        if (type === "mood") {
-            return Math.round(prevAverage / 5);
-        } else {
-            return Math.floor(prevAverage / 5);
-        }
+        return Math.round(prevAverage / 5);
     }
     return 0;
 };

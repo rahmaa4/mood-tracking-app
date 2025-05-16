@@ -50,7 +50,7 @@ export default function AverageScore({
                   </p>
                 </div>
                 
-                <div className={`flex items-center gap-2`}>
+                <div className={`flex gap-2`}>
                     {averageMoodTrend && averageMoodTrend}
                 </div>
               </div>
@@ -64,7 +64,7 @@ export default function AverageScore({
                   </p>
                 </div>
                 
-                <div className={`flex items-center gap-2 `}>
+                <div className={`flex gap-2`}>
                     {averageSleepTrend && averageSleepTrend}
                 </div>
                 
