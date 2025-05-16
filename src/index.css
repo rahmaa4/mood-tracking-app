@@ -1,10 +1,19 @@
 @import "tailwindcss";
 
-:root{
-    --lightGradient : linear-gradient(180deg, #F5F5FF 72.99%, #E0E0FF 100%);
+@font-face {
+    font-family: "Reddit Sans";
+    src: url("/assets/fonts/Reddit_Sans/RedditSans-VariableFont_wght.ttf"), format("truetype");
+    display: swap;
+    font-weight: 200 900;
 }
 
-@theme {
+:root{
+    --lightGradient : linear-gradient(180deg, #F5F5FF 72.99%, #E0E0FF 100%);
+    --primaryFont : 'Reddit Sans', sans-serif;
+}
+
+
+@theme inline {
     --color-neutral900: #21214D;
     --color-neutral600: #57577B;
     --color-neutral300: #9393B7;
@@ -20,6 +29,22 @@
     --color-indigo200: #B8B1FF;
     --color-green300: #89E780;
     --color-amber300: #FFC97C;
+    --font-primary: var(--primaryFont);
+}
+
+@layer base {
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background: transparent;
+        font-family: var(--font-primary);
+        color: var(--color-neutral900);
+        letter-spacing: -0.85px;
+        text-decoration: none;
+        list-style: none;
+        border: none;
+    }
 }
 
 html {

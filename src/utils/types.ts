@@ -6,5 +6,18 @@ export type Entry = {
     sleepHours: number
 }
 
+export type MoodsData = {
+    name: string,
+    coloredIcon: string,
+    whiteIcon: string,
+    bgColor: string,
+    score: number
+} 
+
 export type MoodEntries = Entry[];
 export type MoodQuotes = Record<string, string[]>;
+
+export type GlobalState = {
+    MoodEntries: Entry[],
+    MoodQuotes: MoodQuotes
+}
