@@ -6,6 +6,7 @@ import { loadEntries } from "../Slices/MoodEntries";
 import Greeting from "../components/Greeting/Greeting";
 import Header from "../components/Header/Header";
 import AverageScores from "../components/AverageScores/AverageScores";
+import TrendsChart from "../components/TrendsChart/TrendsChart";
 
 
 export default function App() {
@@ -65,7 +66,11 @@ export default function App() {
         <>
             <Header/>
             <Greeting dateToday={fullDate} />
-            <AverageScores/>
+            <div className={` flex flex-col gap-8`}>
+                <AverageScores />
+                <TrendsChart/>
+            </div>
+            
         </>
     )
 }

@@ -58,7 +58,7 @@ export default function AverageScore({
               <div>
                 
                 <div className={`flex items-center gap-4 mb-3`}>
-                  {iconSleep}
+                  {iconSleep("average")}
                   <p className={`text-neutral0 text-xl font-semibold`}>
                     {currentAverageSleep ? currentAverageSleep : ""}
                   </p>

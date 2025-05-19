@@ -55,3 +55,17 @@ html {
 html, body, #root {
     min-height: 100vh;
 }
+
+@layer component {
+    .chartGridRows {
+        display: grid;
+        grid-template-rows: repeat(5, 1fr) 40px;
+       
+    }
+
+    .hoursAxisGridRows{
+        display: grid;
+        grid-template-rows: repeat(5, 1fr) 40px;
+        gap: 38px;
+    }
+}
