@@ -6,7 +6,7 @@ export default function Chart({ userEntries }: { userEntries: MoodEntries }) {
         <div className={`flex gap-4 overflow-scroll`}>
             {
                 userEntries.reverse().map((entry, index) => {
-                    return <Bar entryData={entry} key={`bar-${index}`}/> 
+                    return <Bar entryData={entry} key={`bar-${index}`} position={index} /> 
                    })
             }
         </div>

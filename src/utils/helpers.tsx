@@ -1,5 +1,5 @@
-import type { MoodEntries } from "./types";
-
+import type { Entry, MoodEntries} from "./types";
+import { moods } from "./constants";
  export const handleDateDisplayed = () => {
         let ordinal = "";
         const todaysDate = new Date().getDate();
@@ -90,6 +90,25 @@ export const handleAverageSleep = (num: number) => {
 };
 
 
+export const selectMoodData = (entryData:Entry) => {
+    switch (entryData.mood) {
+        case -2: {
+            return moods[0];
+        }
+        case -1: {
+            return moods[1];
+        }
+        case 0: {
+            return moods[2];
+        }
+        case 1: {
+            return moods[3];
+        }
+        case 2: {
+            return moods[4];
+        }
+    }
+}
 
 
 

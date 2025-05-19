@@ -21,3 +21,5 @@ export type GlobalState = {
     MoodEntries: Entry[],
     MoodQuotes: MoodQuotes
 }
+
+export type EntryType = "Mood" | "Sleep" | "Reflection" | "Tags";

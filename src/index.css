@@ -68,4 +68,8 @@ html, body, #root {
         grid-template-rows: repeat(5, 1fr) 40px;
         gap: 38px;
     }
+
+    .boxShadow {
+        box-shadow: 0px 4px 7px 0px hsla(240, 40%, 22%, 0.16);
+    }
 }

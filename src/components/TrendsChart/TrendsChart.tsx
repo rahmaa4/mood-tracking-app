@@ -12,7 +12,7 @@ export default function TrendsChart() {
 
     useEffect(() => {
         setUserEntries([...moodEntries].reverse().filter((entry,index) => {
-            if (index < 14) {
+            if (index < 14) { //return 14 entries, beginning from the last/latest
                 return entry;
             }
         }));

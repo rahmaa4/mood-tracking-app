@@ -1,12 +1,14 @@
 import {type Entry, type MoodsData } from "../../../../utils/types";
-import { moods } from "../../../../utils/constants";
 import { useEffect, useState } from "react";
 import { months } from "../../../../utils/constants";
+import EntryModal from "../EntryModal/EntryModal";
+import { selectMoodData } from "../../../../utils/helpers";
 
-export default function Bar({entryData}: {entryData: Entry}) { //use entryData to determine each entries display
+export default function Bar({entryData, position}: {entryData: Entry, position:number}) { //use entryData to determine each entries display
     const [createdAt, setCreatedAt] = useState(<></>);
     const [height, setHeight] = useState("");
     const [moodData, setMoodData] = useState<MoodsData| null>(); //capture relevant mood data based on entry mood score
+    const [isMouseOver, setIsMouseOver] = useState(false);
 
     useEffect(() => {
         let month = months[new Date(entryData.createdAt).getMonth()]
@@ -35,42 +37,28 @@ export default function Bar({entryData}: {entryData: Entry}) { //use entryData t
         } else {
             setHeight("1");
         }
-
-        switch (entryData.mood) {
-            case -2: {
-                setMoodData(moods[0]);
-                break;
-            }
-            case -1: {
-                setMoodData(moods[1]);
-                break;
-            }
-            case 0: {
-                setMoodData(moods[2]);
-                break;
-            }
-            case 1: {
-                setMoodData(moods[3]);
-                break;
-            }
-            case 2: {
-                setMoodData(moods[4]);
-                break;
-            }
-        }
+    
+    setMoodData(selectMoodData(entryData));
 
     }, [entryData])
 
 
     
     return (
-        <div className={`chartGridRows`}>
-            <div style={{ gridRowStart: `${height}` }} className={`w-10 ${moodData && moodData.bgColor} rounded-full row-end-6 `}>
-                <img src={moodData ? moodData.whiteIcon : ""} className={`mx-auto mt-1`} />
-            </div>
-            <div className={`flex flex-col items-center justify-end row-start-6 row-end-6`}>
-                {createdAt}
+        <div className={`relative flex`}>
+            <EntryModal entryData={entryData} isMouseOver={isMouseOver} position={position} />
+            <div className={`chartGridRows`}>
+                <div
+                    onMouseOver={() => setIsMouseOver(true)} onMouseLeave={() => setIsMouseOver(false)}
+                    style={{ gridRowStart: `${height}` }} className={`w-10 ${moodData && moodData.bgColor} rounded-full row-end-6 w-10 ${moodData && moodData.bgColor}
+                    hover:cursor-pointer`}>
+                    {moodData ? <img src={moodData.whiteIcon} className={`mx-auto mt-1`} /> : null}
+                </div>
+                <div className={`flex flex-col items-center justify-end row-start-6 row-end-6`}>
+                        {createdAt}
+                </div>
             </div>
         </div>
+        
     )
 }
