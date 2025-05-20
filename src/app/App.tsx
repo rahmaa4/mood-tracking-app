@@ -66,11 +66,10 @@ export default function App() {
         <>
             <Header/>
             <Greeting dateToday={fullDate} />
-            <div className={` flex flex-col gap-8`}>
+            <div className={`flex flex-col gap-8 lg:flex-row min-h-[453px]`}>
                 <AverageScores />
                 <TrendsChart/>
             </div>
-            
         </>
     )
 }

@@ -47,10 +47,10 @@ export default function Bar({entryData, position}: {entryData: Entry, position:n
     return (
         <div className={`relative flex`}>
             <EntryModal entryData={entryData} isMouseOver={isMouseOver} position={position} />
-            <div className={`chartGridRows`}>
+            <div className={`barGridRows`}>
                 <div
                     onMouseOver={() => setIsMouseOver(true)} onMouseLeave={() => setIsMouseOver(false)}
-                    style={{ gridRowStart: `${height}` }} className={`w-10 ${moodData && moodData.bgColor} rounded-full row-end-6 w-10 ${moodData && moodData.bgColor}
+                    style={{ gridRowStart: `${height}` }} className={` w-10 ${moodData && moodData.bgColor} rounded-full row-end-6 ${moodData && moodData.bgColor}
                     hover:cursor-pointer`}>
                     {moodData ? <img src={moodData.whiteIcon} className={`mx-auto mt-1`} /> : null}
                 </div>

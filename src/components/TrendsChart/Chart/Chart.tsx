@@ -1,5 +1,6 @@
 import type { MoodEntries } from "../../../utils/types"
 import Bar from "./Bar/Bar"
+
 export default function Chart({ userEntries }: { userEntries: MoodEntries }) {
    
     return (

@@ -64,7 +64,7 @@ export default function AverageScores() {
 
 
     return (
-        <div className={`flex flex-col bg-neutral0 px-4 py-5 md:py-6 px-5 rounded-2xl border border-blue100 gap-6`}>
+        <div className={`flex flex-col min-h-full gap-6 lg:min-w-[35%] bg-neutral0 px-4 py-5 md:py-6 px-5 rounded-2xl border border-blue100 `}>
             <AverageScore
                 type="mood"
                 isEnoughData={isEnoughData}
