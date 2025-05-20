@@ -14,6 +14,13 @@ const options = {
         addNewEntry: (state:MoodEntries, action:PayloadAction<Entry>) => { 
             state.push(action.payload) //push new entry to state;
             return state //return updated state. 
+        },
+        replaceEntry: (state: MoodEntries, action: PayloadAction<Entry>) => {
+            const newEntryID = action.payload.createdAt;
+            const updatedState = state.map((entry) => {
+                return entry.createdAt === newEntryID ? action.payload : entry;
+            })
+            return updatedState;
         }
     }
 }

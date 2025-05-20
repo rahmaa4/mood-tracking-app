@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { handleDateDisplayed } from "../utils/helpers";
 import { useDispatch } from "react-redux";
 import { loadMoodQuotes } from "../Slices/MoodQuotes";
-import { loadEntries } from "../Slices/MoodEntries";
+import { addNewEntry, loadEntries } from "../Slices/MoodEntries";
 import Greeting from "../components/Greeting/Greeting";
 import Header from "../components/Header/Header";
 import AverageScores from "../components/AverageScores/AverageScores";
@@ -15,6 +15,7 @@ export default function App() {
     const [month, setMonth] = useState("");
     const [year, setYear] = useState("");
     const [fullDate, setFullDate] = useState("");
+    const [currentHour, setCurrentHour] = useState(new Date().getHours());
     const dispatch = useDispatch();
 
     const getFullDate = () => {
@@ -47,12 +48,18 @@ export default function App() {
         loadData();
         getFullDate();
 
-        const intervalId = setInterval(() => {
+        const dateIntervalId = setInterval(() => {
             getFullDate()
         }, 60000)
+
+        const hourIntervalId = setInterval(() => {
+            setCurrentHour(new Date().getHours()); //every hour update value stored in currentHour.
+        }, 3600000)
+
+        const intervals = [dateIntervalId, hourIntervalId];
         
         return () => {
-            clearInterval(intervalId);
+           intervals.forEach(clearInterval);
         } 
 
     }, [])
@@ -60,6 +67,18 @@ export default function App() {
     useEffect(() => {
         setFullDate(`${weekday} ${date} ${month} ${year}`)
     }, [date, weekday, month, year])
+
+    useEffect(() => {
+        if (currentHour === 0) {
+            dispatch(addNewEntry({
+                createdAt: new Date().toISOString(),
+                mood: 0,
+                sleepHours: 0,
+                feelings: [""],
+                journalEntry: ""
+            })) //add empty entry , each new day. 
+        }
+    }, [currentHour])
 
    
     return (
