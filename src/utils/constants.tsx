@@ -109,4 +109,15 @@ export const decreaseTrendEl = (type: "mood" | "sleep") => {
 export const months =  [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
-];;
+];
+
+export const returnErrorMessage = (errorType: "both" | "size" | "type") => {
+    const errorBoth = "Invalid File";
+    const errorSize = "File too large";
+    const errorFileType = "Invalid file type"
+    return (
+        <>
+            {errorType === "size" ? errorSize : errorType === "type"? errorFileType : errorBoth}. Please upload a valid file.
+        </>
+    )
+}

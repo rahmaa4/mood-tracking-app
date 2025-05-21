@@ -25,20 +25,21 @@ export default function Bar({entryData, position}: {entryData: Entry, position:n
     }, [entryData])
 
     useEffect(() => {
-        const sleepHours = Math.round(entryData.sleepHours)
-        if ( 0 <= sleepHours && sleepHours <= 2) {
-            setHeight("5");
-        } else if (sleepHours >= 3 && sleepHours <= 4) {
-            setHeight("4");
-        } else if (sleepHours >= 5 && sleepHours <= 6) {
-            setHeight("3");
-        } else if (sleepHours >= 7 && sleepHours <= 8) {
-            setHeight("2");
-        } else {
-            setHeight("1");
+        setMoodData(selectMoodData(entryData));
+        if (entryData.sleepHours) {
+            const sleepHours = entryData.sleepHours;
+             if ( 0 <= sleepHours && sleepHours <= 2) {
+                setHeight("5");
+            } else if (sleepHours >= 3 && sleepHours <= 4) {
+                setHeight("4");
+            } else if (sleepHours >= 5 && sleepHours <= 6) {
+                setHeight("3");
+            } else if (sleepHours >= 7 && sleepHours <= 8) {
+                setHeight("2");
+            } else {
+                setHeight("1");
+            }
         }
-    
-    setMoodData(selectMoodData(entryData));
 
     }, [entryData])
 

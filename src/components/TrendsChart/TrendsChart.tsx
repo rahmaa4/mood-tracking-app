@@ -18,7 +18,6 @@ export default function TrendsChart() {
         }));
     }, [moodEntries])
 
-    
     return (
         <div className={`w-full lg:min-w-[65%] min-h-full bg-neutral0 flex flex-col gap-6 px-4 py-5 md:py-6 px-5 rounded-2xl border border-blue100`}>
             <h2 className={`font-bold text-xl lg:text-2xl`}>Mood and sleep trends</h2>

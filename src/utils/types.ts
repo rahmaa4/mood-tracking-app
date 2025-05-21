@@ -1,9 +1,9 @@
 export type Entry = {
     createdAt: string,
-    mood: number, 
-    feelings: string[], 
-    journalEntry: string, 
-    sleepHours: number
+    mood: number | null, 
+    feelings: string[] | null, 
+    journalEntry: string | null, 
+    sleepHours: number | null
 }
 
 export type MoodsData = {

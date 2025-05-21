@@ -35,9 +35,9 @@ export const calculateAverage = (arr:MoodEntries, type:"mood"|"sleep") => {
     const stoppingPoint = lastEntry - 5;
     for (let i = arr.length - 1; i > stoppingPoint; i--){
         if (type === "mood") {
-            averageMood += arr[i].mood;
+            averageMood = averageMood + (arr[i].mood ?? 0); //if null or undefined, add 0 to Average 
         } else {
-            averageSleep += arr[i].sleepHours;
+            averageSleep = averageSleep + (arr[i].sleepHours ?? 0);
         }
     }
     if (type === "mood") {
@@ -55,16 +55,14 @@ export const calcPrevAverage = (arr: MoodEntries, type: "mood" | "sleep") => {
         const start = arr.length - 6; //get the first entry before the last 5 set of entries
         const end = start - 5;
         for (let i = start; i > end; i--) {
-            if (type === "mood") {
-                prevAverage += arr[i].mood;
+            if (type=== "mood") {
+                prevAverage = prevAverage + (arr[i].mood ?? 0); //if null or undefined, add 0 to Average 
             } else {
-                prevAverage += arr[i].sleepHours;
+                prevAverage = prevAverage + (arr[i].sleepHours ?? 0);
+            }
             }
         }
-
         return Math.round(prevAverage / 5);
-    }
-    return 0;
 };
 
 
@@ -107,8 +105,23 @@ export const selectMoodData = (entryData:Entry) => {
         case 2: {
             return moods[4];
         }
+        default: {
+            return null;
+        }
     }
 }
+
+
+export const testFileType = (fileType:string) => {
+    return /image\/(png|jpeg)/.test(fileType) //search for image/png or image/jpeg
+}
+
+export const testFileSize = (fileSize: number) => {
+    return fileSize / 1000 < 250;
+}   
+
+
+
 
 
 
