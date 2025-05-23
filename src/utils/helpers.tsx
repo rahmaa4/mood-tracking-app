@@ -126,8 +126,6 @@ export const feelingsTags = [
 "Irritable", "Peaceful", "Tired", "Hopeful", "Confident", "Stressed", "Content", "Disappointed", "Optimistic", "Restless"]
 
 
-type HoursRange = "0-2 hours" | "3-4 hours" | "5-6 hours" | "7-8 hours" | "9+ hours";
-
 export const selectAverageSleepHours = (range: string):number | null => {
     switch (range) {
         case "0-2 hours": {

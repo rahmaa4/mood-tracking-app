@@ -18,7 +18,7 @@ export default function MoodSlide({ slide }: MoodSlide) {
         How was your mood today?
       </SlideTitle>
       <div className={`flex flex-col gap-5`}>
-        {moods.reverse().map((moodData, index) => {
+        {[...moods].reverse().map((moodData, index) => {
           return <MoodOption moodData={moodData} key={`mood-data-${index}`} />;
         })}
       </div>
