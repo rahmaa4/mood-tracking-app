@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Form from "./Form/Form";
 import { testFileType, testFileSize } from "../../../../utils/helpers";
 import { returnErrorMessage } from "../../../../utils/constants";
+import iconClose from "/assets/images/icon-close.svg";
 
 type SettingModalProps = {
     name: string,
@@ -51,7 +52,9 @@ export default function SettingModal({ name, setName, setIsDisplaySettings, setA
 
 
     return (
-        <div className={`w-[90vw] md:w-[600px]  px-5 py-8 bg-neutral0 flex flex-col rounded-2xl`}>
+        <div className={`w-[90vw] md:w-[600px] px-6 py-6 bg-neutral0 flex flex-col rounded-2xl`}>
+            <button className={`mb-2 flex justify-end hover:cursor-pointer`} onClick={() => setIsDisplaySettings(false)}><img src={iconClose} alt="" className={`w-[12px]`} /></button>
+         
             <div>
                 <p className={`text-2xl font-bold mb-2`}>Update your profile</p>
                 <p className={` text-neutral600 leading-[1.3] tracking-none`}>Personalise your account with your name and photo.</p>

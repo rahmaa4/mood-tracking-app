@@ -18,11 +18,11 @@ export default function ProfileIcon({ name, setName}: ProfileIconProps) {
 
     return (
         <div className={`relative`}>
-            <div className={`flex items-center gap-[10px]`}>
+            <div className={`flex items-center gap-[10px] hover:cursor-pointer`} onClick={() => setIsDropdown((prev) => !prev)} >
                 <div className={`w-10 aspect-square rounded-full ${avatar.length === 0 && `bg-[url("/assets/images/avatar-placeholder.svg")]`} bg-contain bg-no-repeat bg-center `}>
                     { avatar.length > 0 && <img src={avatar} alt="" className={`rounded-full`} />}
                 </div>
-                <img src={downChevron} alt="Drop down icon" className={`hover:cursor-pointer`} onClick={() => setIsDropdown((prev) => !prev)}/>
+                <img src={downChevron} alt="Drop down icon"/>
             </div>
             <Dropdown isDropdown={isDropdown} setIsDropdown={setIsDropdown} setIsDisplaySettings={setIsDisplaySettings} name={name} />
            
