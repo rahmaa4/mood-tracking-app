@@ -1,4 +1,5 @@
-import type { Entry, MoodEntries} from "./types";
+import type { Entry, MoodEntries } from "./types";
+
 import { moods } from "./constants";
  export const handleDateDisplayed = () => {
         let ordinal = "";
@@ -35,7 +36,7 @@ export const calculateAverage = (arr:MoodEntries, type:"mood"|"sleep") => {
     const stoppingPoint = lastEntry - 5;
     for (let i = arr.length - 1; i > stoppingPoint; i--){
         if (type === "mood") {
-            averageMood = averageMood + (arr[i].mood ?? 0); //if null or undefined, add 0 to Average 
+            averageMood = averageMood + (arr[i].mood ?? 0); //if null or undefined, add 0 to Average , else add the value ssotred in arr[i].mood
         } else {
             averageSleep = averageSleep + (arr[i].sleepHours ?? 0);
         }
@@ -51,12 +52,12 @@ export const calculateAverage = (arr:MoodEntries, type:"mood"|"sleep") => {
 
 export const calcPrevAverage = (arr: MoodEntries, type: "mood" | "sleep") => {
     let prevAverage = 0;
-    if (arr.length >= 10) {//check if there is at least 10 entries, which would allow us to compare the current avaerga to the previous average 
+    if (arr.length >= 10) {//check if there is at least 10 entries, which would allow us to compare the current average to the previous average 
         const start = arr.length - 6; //get the first entry before the last 5 set of entries
         const end = start - 5;
         for (let i = start; i > end; i--) {
             if (type=== "mood") {
-                prevAverage = prevAverage + (arr[i].mood ?? 0); //if null or undefined, add 0 to Average 
+                prevAverage = prevAverage + (arr[i].mood ?? 0); //if null or undefined, add 0 to Average else add the value stored in arr[i].mood;
             } else {
                 prevAverage = prevAverage + (arr[i].sleepHours ?? 0);
             }
@@ -120,8 +121,39 @@ export const testFileSize = (fileSize: number) => {
     return fileSize / 1000 < 250;
 }   
 
+export const feelingsTags = [
+    "Joyful", "Down", "Anxious", "Calm", "Excited", "Frustrated", "Lonely", "Grateful", "Overwhelmed", "Motivated", 
+"Irritable", "Peaceful", "Tired", "Hopeful", "Confident", "Stressed", "Content", "Disappointed", "Optimistic", "Restless"]
 
 
+type HoursRange = "0-2 hours" | "3-4 hours" | "5-6 hours" | "7-8 hours" | "9+ hours";
+
+export const selectAverageSleepHours = (range: string):number | null => {
+    switch (range) {
+        case "0-2 hours": {
+            return 1;
+        }
+        case "3-4 hours": {
+            return 3.5;
+        }
+        case "5-6 hours": {
+            return 5.5;
+        }
+        case "7-8 hours": {
+            return 7.5
+        };
+        case "9+ hours": {
+            return 9;
+        }
+        default: {
+            return null;
+        }
+    }
+};
+
+export const extractDate = (isoString: string) => {
+    return isoString.split("").slice(0, isoString.indexOf("T")).join(" ");
+}
 
 
 

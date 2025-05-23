@@ -23,3 +23,4 @@ export type GlobalState = {
 }
 
 export type EntryType = "Mood" | "Sleep" | "Reflection" | "Tags";
+

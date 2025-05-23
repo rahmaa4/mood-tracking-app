@@ -7,6 +7,10 @@ import Header from "../components/Header/Header";
 import AverageScores from "../components/AverageScores/AverageScores";
 import TrendsChart from "../components/TrendsChart/TrendsChart";
 import { useFullDate } from "../utils/hooks/useFullDate";
+import CurrentSlide from "../utils/contexts/CurrentLogSlide/CurrentLogSlide";
+import CurrentMood from "../utils/contexts/CurrentMoodEntry/CurrentMoodEntry";
+import CurrentFeelings from "../utils/contexts/CurrentFeeling/CurrentFeeling";
+import CurrentSleepHours from "../utils/contexts/CurrentSleepHours/CurrentSleepHours";
 
 export default function App() {
     const [name, setName] = useState("User");
@@ -57,12 +61,20 @@ export default function App() {
    
     return (
         <>
-            <Header name={name} setName={setName} />
-            <Greeting dateToday={fullDate} name={name} />
-            <div className={`flex flex-col gap-8 lg:flex-row min-h-[453px]`}>
-                <AverageScores />
-                <TrendsChart/>
-            </div>
+            <CurrentSlide>
+                <CurrentMood>
+                    <CurrentFeelings>
+                        <CurrentSleepHours>
+                            <Header name={name} setName={setName} />
+                            <Greeting dateToday={fullDate} name={name} />
+                            <div className={`flex flex-col gap-8 lg:flex-row min-h-[453px]`}>
+                                <AverageScores />
+                                <TrendsChart/>
+                            </div>
+                        </CurrentSleepHours>
+                    </CurrentFeelings>
+                </CurrentMood>
+            </CurrentSlide>
         </>
     )
 }

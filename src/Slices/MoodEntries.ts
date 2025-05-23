@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { MoodEntries, Entry} from "../utils/types";
-
+import { extractDate } from "../utils/helpers";
 const initialState:MoodEntries = []
 
 
@@ -16,9 +16,9 @@ const options = {
             return state;
         },
         replaceEntry: (state: MoodEntries, action: PayloadAction<Entry>) => {
-            const newEntryID = action.payload.createdAt;
+            const newEntryID = extractDate(action.payload.createdAt);
             const updatedState = state.map((entry) => {
-                return entry.createdAt === newEntryID ? action.payload : entry;
+                return extractDate(entry.createdAt) === newEntryID ?  action.payload : entry;
             })
             return updatedState;
         }
@@ -26,5 +26,5 @@ const options = {
 }
 
 const MoodEntriesSlice = createSlice(options);
-export const { loadEntries, addNewEntry } = MoodEntriesSlice.actions;
+export const { loadEntries, addNewEntry, replaceEntry } = MoodEntriesSlice.actions;
 export const MoodEntriesReducer = MoodEntriesSlice.reducer;

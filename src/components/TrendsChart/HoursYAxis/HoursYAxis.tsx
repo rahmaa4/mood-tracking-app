@@ -1,5 +1,5 @@
 import { iconSleep } from "../../../utils/constants";
-export const hoursYAxis = ["0-2 hours", "3-4 hours", "5-6 hours", "7-8 hours", "9+ hours"].reverse();
+import { hoursYAxis } from "../../../utils/constants";
 
 export default function HoursYAxis() {
     return (
