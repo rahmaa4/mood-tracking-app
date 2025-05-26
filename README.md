@@ -6,6 +6,7 @@ feelings, thoughts and reflections.
 1. React
 2. Tailwind CSS
 3. Typescript
+------
 (Libraries)
 4. Context API
 5. Redux 
