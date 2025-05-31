@@ -13,7 +13,7 @@ export default function CurrentFeelings({ children }: { children: React.ReactNod
      useEffect(() => {
          if (currentFeelings.length === 4) {
              setCurrentFeelings(
-                 currentFeelings.filter((feeling, index) => {
+                 currentFeelings.filter((_, index) => {
                      return index !== 0; //remove the first element, when array length reaches 4 to ensure max 3.
                  }
                  )
