@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
+import { motion } from "motion/react";
 import { loadMoodQuotes } from "../Slices/MoodQuotes";
 import { addNewEntry, loadEntries } from "../Slices/MoodEntries";
 import Greeting from "../components/Greeting/Greeting";
@@ -70,17 +71,32 @@ export default function App() {
                 <CurrentMood>
                     <CurrentFeelings>
                         <CurrentSleepHours>
+                            <motion.div
+                            className={`opacity-0`}
+                            animate={{ opacity: 1}}
+                            transition={{
+                                opacity: { duration: 2}
+                            }}
+                            >
                             <Header name={name} setName={setName} />
                             <Greeting
                                 dateToday={fullDate}
                                 name={name}
                                 loggedMoodData={loggedMoodData}
                                 setLoggedMoodData={setLoggedMoodData}
-                            />
-                            <div className={`flex flex-col gap-8 lg:flex-row lg:justify-center min-h-[453px] lg:max-w-[1170px] lg:mx-auto`}>
+                                />
+                            </motion.div>
+                            <motion.div
+                                className={`opacity-0 flex flex-col gap-8 lg:flex-row lg:justify-center min-h-[453px] lg:max-w-[1170px] lg:mx-auto`}
+                                animate={{ opacity: 1}}
+                                transition={{
+                                    opacity: { duration: 2 }
+                                }}
+                            >
+                                
                                 <AverageScores />
                                 <TrendsChart/>
-                            </div>
+                            </motion.div>
                         </CurrentSleepHours>
                     </CurrentFeelings>
                 </CurrentMood>
