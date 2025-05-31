@@ -1,16 +1,16 @@
 import {createContext, useState } from "react";
-import type { MoodsData } from "../../types";
+import type { MoodData } from "../../types";
 
 type CurrentMoodEntryContext = {
-    currentMood: MoodsData | null,
-    setCurrentMood:React.Dispatch<React.SetStateAction<MoodsData | null>>
+    currentMood: MoodData | null,
+    setCurrentMood:React.Dispatch<React.SetStateAction<MoodData | null>>
 }
 
 export const CurrentMoodEntryContext = createContext<CurrentMoodEntryContext>({currentMood: null, setCurrentMood: () => { } });
 
 
 export default function CurrentMood({ children }: { children: React.ReactNode }) {
-    const [currentMood, setCurrentMood] = useState<MoodsData | null>(null)
+    const [currentMood, setCurrentMood] = useState<MoodData | null>(null)
     return (
         <CurrentMoodEntryContext.Provider value={{currentMood, setCurrentMood}}>
             {children}
