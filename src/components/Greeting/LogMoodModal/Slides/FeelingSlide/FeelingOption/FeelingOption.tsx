@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import iconCheck from "/assets/images/icon-check.svg";
+import IconCheck from "../../../../../../assets/images/icon-check.svg?react";
 import { CurrentFeelingsContext } from "../../../../../../utils/contexts/CurrentFeeling/CurrentFeeling";
 
 export default function FeelingOption({ tag }: { tag: string }) {
@@ -37,7 +37,7 @@ export default function FeelingOption({ tag }: { tag: string }) {
             onClick={() => setIsClicked((prev) => !prev)}
         >
             <div className={`flex justify-center items-center border border-blue200 rounded-[4px] w-[16px] aspect-square ${isActive && 'bg-blue600'}`}>
-                {isActive && <img src={iconCheck} alt=""/>}
+                {isActive && <IconCheck/>}
             </div>
             <p>{tag}</p>
         </div>
