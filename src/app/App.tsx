@@ -11,11 +11,13 @@ import CurrentSlide from "../utils/contexts/CurrentLogSlide/CurrentLogSlide";
 import CurrentMood from "../utils/contexts/CurrentMoodEntry/CurrentMoodEntry";
 import CurrentFeelings from "../utils/contexts/CurrentFeeling/CurrentFeeling";
 import CurrentSleepHours from "../utils/contexts/CurrentSleepHours/CurrentSleepHours";
+import type { Entry } from "../utils/types";
 
 export default function App() {
     const [name, setName] = useState("User");
-    const [date, fullDate] = useFullDate();
     const [isLoaded, setIsLoaded] = useState(false)
+    const [loggedMoodData, setLoggedMoodData] = useState<Entry | null>(null);
+    const [date, fullDate] = useFullDate();
     const lastDateRef = useRef("");
     const dispatch = useDispatch();
 
@@ -31,20 +33,21 @@ export default function App() {
         }
     }
 
-    const loadData = async () => {
-        const result = await getData();
-        dispatch(loadMoodQuotes(result.moodQuotes));
-        dispatch(loadEntries(result.moodEntries));
-        setIsLoaded(true)
-    }
-
     useEffect(() => {
+        const loadData = async () => {
+            const result = await getData();
+            if (result) {
+                dispatch(loadMoodQuotes(result.moodQuotes));
+                dispatch(loadEntries(result.moodEntries));
+                setIsLoaded(true)   
+            }
+        }
         loadData();
     }, [])
 
     useEffect(() => {
         if (isLoaded) {
-             if (lastDateRef.current !== date) {
+         if (lastDateRef.current !== date) {//tracks for new date.
             dispatch(addNewEntry({
                 createdAt: new Date().toISOString(),
                 mood: null,
@@ -52,11 +55,13 @@ export default function App() {
                 feelings: null,
                 journalEntry: null
             }));
-        lastDateRef.current = date;
-    }   
+            setIsLoaded(false);
+            setLoggedMoodData(null)//reset logged mood data, when it is a new day.
+            lastDateRef.current = date;//update ref to store today's date.
         }
-        setIsLoaded(false);
+    }
     }, [date, isLoaded]);
+
 
    
     return (
@@ -66,8 +71,13 @@ export default function App() {
                     <CurrentFeelings>
                         <CurrentSleepHours>
                             <Header name={name} setName={setName} />
-                            <Greeting dateToday={fullDate} name={name} />
-                            <div className={`flex flex-col gap-8 lg:flex-row min-h-[453px]`}>
+                            <Greeting
+                                dateToday={fullDate}
+                                name={name}
+                                loggedMoodData={loggedMoodData}
+                                setLoggedMoodData={setLoggedMoodData}
+                            />
+                            <div className={`flex flex-col gap-8 lg:flex-row lg:justify-center min-h-[453px] lg:max-w-[1170px] lg:mx-auto`}>
                                 <AverageScores />
                                 <TrendsChart/>
                             </div>

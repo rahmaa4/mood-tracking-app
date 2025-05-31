@@ -46,41 +46,49 @@
         list-style: none;
         border: none;
     }
-}
-
-html {
+    html {
     background: var(--lightGradient);
     background-color:#F5F5FF;
+    }
+
+    html, body, #root {
+        min-height: 100vh;
+    }
+
+    svg, path {
+        color: inherit;
+    }
+
 }
 
-html, body, #root {
-    min-height: 100vh;
-}
 
-@layer component {
-    .barGridRows {
-        display: grid;
-        grid-template-rows: repeat(5, 1fr) 40px;
-    }
-    .flexCont {
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
-    }
 
-    .hoursAxisGridRows{
-        display: grid;
-        grid-template-rows: repeat(5, 1fr) 40px;
-        gap: 38px;
-    }
-
-    .boxShadow {
-        box-shadow: 0px 4px 7px 0px hsla(240, 40%, 22%, 0.16);
-    }
-}
 
 @layer utility {
     .darkLowOpacity{
         background-color: var(--darkLowOpacity);
     }
+    
+     .barGridRows {
+        display: grid;
+        grid-template-rows: repeat(4, 1fr) 40px;
+    }
+
+    .boxShadow {
+        box-shadow: 0px 4px 7px 0px hsla(240, 40%, 22%, 0.16);
+    }
+
+    .chartScroll::-webkit-scrollbar {
+        height: 7px;
+    }
+
+    .chartScroll::-webkit-scrollbar-thumb{
+        background-color: var(--color-blue100);
+        border-radius: 8px;
+    }
+
+    .chartScroll::-webkit-scrollbar-thumb:hover{
+        cursor: pointer;
+    }
+    
 }
