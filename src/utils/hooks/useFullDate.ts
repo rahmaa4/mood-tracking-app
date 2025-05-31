@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { handleDateDisplayed } from "../helpers";
 
-export const useFullDate = (initialFullDate = "") => {
+export const useFullDate = () => {
     const [weekday, setWeekday] = useState("");
     const [date, setDate] = useState("");
     const [month, setMonth] = useState("");
     const [year, setYear] = useState("");
-    const [fullDate, setFullDate] = useState(initialFullDate);
+    const [fullDate, setFullDate] = useState("");
 
     const handleFullDate = () => {
         setWeekday(new Date().toLocaleDateString("en-GB", { weekday: "long" }));
@@ -27,7 +27,7 @@ export const useFullDate = (initialFullDate = "") => {
     }, [])
 
     useEffect(() => {
-        setFullDate(`${weekday} ${date} ${month} ${year}`)
+        setFullDate(`${weekday} ${date} ${month} ${year}`);
     }, [weekday, date, month, year])
 
 

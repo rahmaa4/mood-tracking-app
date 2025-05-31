@@ -1,28 +1,29 @@
 import type { Entry, MoodEntries } from "./types";
-
 import { moods } from "./constants";
+import IncreaseTrendIcon from "../assets/images/icon-trend-increase.svg?react";
+import SameTrendIcon from "../assets/images/icon-trend-same.svg?react";
+import DecreaseTrendIcon from "../assets/images/icon-trend-decrease.svg?react";
+
+
  export const handleDateDisplayed = () => {
         let ordinal = "";
         const todaysDate = new Date().getDate();
-        if (todaysDate > 3 && todaysDate < 21) {
-            ordinal = "th";
-        } else {
-            switch (todaysDate % 10) {
-                case 1: {
-                    ordinal = "st";
-                    break;
-                }
-                case 2: {
-                    ordinal = "nd";
-                    break;
-                }
-                case 3: {
-                    ordinal = "rd";
-                    break;
-                }
-                default: {
-                    ordinal = "th";
-                }
+        const lastDigit = todaysDate.toString().split("")[length - 1];
+        switch (lastDigit) {
+            case "1": {
+                ordinal = "st";
+                break;
+            }
+            case "2": {
+                ordinal = "nd";
+                break;
+            }
+            case "3": {
+                ordinal = "rd";
+                break;
+            }
+            default: {
+                ordinal = "th";
             }
         }
         return `${todaysDate}${ordinal}`;
@@ -36,7 +37,7 @@ export const calculateAverage = (arr:MoodEntries, type:"mood"|"sleep") => {
     const stoppingPoint = lastEntry - 5;
     for (let i = arr.length - 1; i > stoppingPoint; i--){
         if (type === "mood") {
-            averageMood = averageMood + (arr[i].mood ?? 0); //if null or undefined, add 0 to Average , else add the value ssotred in arr[i].mood
+            averageMood = averageMood + (arr[i].mood ?? 0); //if null or undefined, add 0 to Average , else add the value stored in arr[i].mood
         } else {
             averageSleep = averageSleep + (arr[i].sleepHours ?? 0);
         }
@@ -61,18 +62,15 @@ export const calcPrevAverage = (arr: MoodEntries, type: "mood" | "sleep") => {
             } else {
                 prevAverage = prevAverage + (arr[i].sleepHours ?? 0);
             }
-            }
         }
         return Math.round(prevAverage / 5);
+    }
+    return null;
 };
 
 
 
-
-
-
-
-export const handleAverageSleep = (num: number) => {
+export const returnSleepRange = (num: number) => {
     if (num >= 0 && num <= 2) {
         return "0-2 Hours";
     } else if (num >= 3 && num <= 4) {
@@ -151,6 +149,33 @@ export const selectAverageSleepHours = (range: string):number | null => {
 
 export const extractDate = (isoString: string) => {
     return isoString.split("").slice(0, isoString.indexOf("T")).join(" ");
+}
+
+
+//The function below takes the current Average and previous average scores to determine the general trend report to display. 
+export const determineTrend = (currentAv: number, prevAv: number | null, type: "mood" | "sleep") => {
+    if (prevAv != null) {
+        if (currentAv < prevAv) {
+        return {
+             icon: <DecreaseTrendIcon width={"14px"} height={"14px"} style={{color: `${type === "mood" ? "var(--color-neutral900)" : "var(--color-neutral0)"}`}} />,
+             statement: "Decrease from the previous 5 check-ins"
+        }
+    } else if (currentAv === prevAv) {
+        return {
+                icon: <SameTrendIcon width={"14px"} height={"14px"} style={{color: `${type === "mood" ? "var(--color-neutral900)" : "var(--color-neutral0)"}`}} />,
+                statement: "Same as the previous 5 check-ins"
+               }
+    } else if(currentAv > prevAv){
+        return {
+               icon: <IncreaseTrendIcon width={"14px"} height={"14px"} style={{color: `${type === "mood" ? "var(--color-neutral900)" : "var(--color-neutral0)"}`}} />,
+               statement: "Increase from the previous 5 check-ins"
+        }
+    }    
+    }
+    return {
+        icon: <></>,
+        statement: "Log in for more days to see trends!"
+    }
 }
 
 
