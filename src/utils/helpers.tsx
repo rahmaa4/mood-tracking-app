@@ -6,9 +6,10 @@ import DecreaseTrendIcon from "../assets/images/icon-trend-decrease.svg?react";
 
 
  export const handleDateDisplayed = () => {
-        let ordinal = "";
-        const todaysDate = new Date().getDate();
-        const lastDigit = todaysDate.toString().split("")[length - 1];
+     let ordinal = "";
+     const todaysDate = new Date().getDate();
+     const todaysDateArr = todaysDate.toString().split("");
+     const lastDigit = todaysDateArr[todaysDateArr.length - 1];
         switch (lastDigit) {
             case "1": {
                 ordinal = "st";
