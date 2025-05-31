@@ -1,81 +1,68 @@
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import AverageScore from "./AverageScore/AverageScore";
-import type { GlobalState, MoodsData } from "../../utils/types";
-import { calcPrevAverage, calculateAverage } from "../../utils/helpers";
-import { moods, increaseTrendEl, decreaseTrendEl, sameTrendEl } from "../../utils/constants";
-import { handleAverageSleep } from "../../utils/helpers";
+import { useSelector } from "react-redux";
+import ReportCard from "./ReportCard/ReportCard";
+import type { GlobalState, MoodReport, SleepReport} from "../../utils/types";
+import { moods} from "../../utils/constants";
+import { returnSleepRange } from "../../utils/helpers";
+import { calcPrevAverage, calculateAverage, determineTrend } from "../../utils/helpers";
 
 
 export default function AverageScores() {
-    const [isEnoughData, setIsEnoughData] = useState(false);
-    const [averageMoodScore, setAverageMoodScore] = useState(0); //stores calculated score
-    const [averageSleepScore, setAverageSleepScore] = useState(0); //stores calculated score
-    const [currentAverageMood, setCurrentAverageMood] = useState<MoodsData | null>(null); //determines the content to display
-    const [currentAverageSleep, setCurrentAverageSleep] = useState(""); //determines the content to display
-    const [prevAverageMoodScore, setPrevAverageMoodScore] = useState(0);
-    const [prevAverageSleepScore, setPrevAverageSleepScore] = useState(0);
-    const [averageMoodTrend, setAverageMoodTrend] = useState(<></>);
-    const [averageSleepTrend, setAverageSleepTrend] = useState(<></>);
-
     const moodEntries = useSelector((state: GlobalState) => state.MoodEntries);
+    const [isEnoughData, setIsEnoughData] = useState(false);
+    const [moodReport, setMoodReport] = useState<MoodReport | null>(null);
+    const [sleepReport, setSleepReport] = useState<SleepReport | null>(null);
+
+       useEffect(() => {
+            if (moodEntries.length >= 5) {//check if there is enough data to calculate averages.
+                setIsEnoughData(true);
+            } else {
+                setIsEnoughData(false);
+            }
+        }, [moodEntries]); 
+
 
     useEffect(() => {
-        if (moodEntries.length >= 5) {
-            setIsEnoughData(true);
-        } else {
-            setIsEnoughData(false);
+        if (isEnoughData) { 
+            const averageMoodData = moods.filter((mood) => {
+            return mood.score === calculateAverage(moodEntries, "mood");
+            })[0]
+            const averageSleepData = returnSleepRange(calculateAverage(moodEntries, "sleep"));
+            setMoodReport(
+                {
+                    averageMood: averageMoodData,
+                    trend: determineTrend(calculateAverage(moodEntries, "mood"), calcPrevAverage(moodEntries, "mood"), "mood")
+                }
+            );
+            setSleepReport({
+                averageSleep: averageSleepData,
+                trend: determineTrend(calculateAverage(moodEntries, "sleep"), calcPrevAverage(moodEntries, "sleep"), "sleep")
+            })
         }
-    }, [moodEntries]);
 
-
-    useEffect(() => {
-        if (isEnoughData) {
-            setAverageMoodScore(calculateAverage(moodEntries, "mood")); //recalculate average mood
-            setAverageSleepScore(calculateAverage(moodEntries, "sleep")); //recalculate average sleep
-            setPrevAverageMoodScore(calcPrevAverage(moodEntries, "mood"));
-            setPrevAverageSleepScore(calcPrevAverage(moodEntries, "sleep"));
-        }
     }, [moodEntries, isEnoughData]);
 
 
-    useEffect(() => {
-        let averageMoodData = moods.filter((mood) => {
-            return mood.score === averageMoodScore;
-        })
-        setCurrentAverageMood(averageMoodData[0]);
-        setCurrentAverageSleep(handleAverageSleep(averageSleepScore));
-        compareAverageTrend(averageMoodScore, prevAverageMoodScore, "mood");
-        compareAverageTrend(averageSleepScore, prevAverageSleepScore, "sleep");
-
-    }, [averageMoodScore, averageSleepScore]);
-
-
-    const compareAverageTrend = (currentAv:number, prevAv:number, type: "mood"| "sleep") => {
-        if (prevAv < currentAv) {
-            type === "mood" ? setAverageMoodTrend(increaseTrendEl("mood")) : setAverageSleepTrend(increaseTrendEl("sleep")); 
-        } else if (prevAv === currentAv) {
-            type === "mood" ? setAverageMoodTrend(sameTrendEl("mood")) : setAverageSleepTrend(sameTrendEl("sleep"));
-        } else if (prevAv > currentAv) {
-            type === "mood" ? setAverageMoodTrend(decreaseTrendEl("mood")) : setAverageSleepTrend(decreaseTrendEl("sleep"));
-        }
-    }
-    
-
-
     return (
-        <div className={`flex flex-col min-h-full gap-6 lg:min-w-[35%] bg-neutral0 px-4 py-5 md:py-6 px-5 rounded-2xl border border-blue100 `}>
-            <AverageScore
+        <div className={`flex flex-col min-h-full gap-4 lg:min-w-[370px] bg-neutral0 px-4 py-5 md:py-6 px-5 rounded-2xl border border-blue100 `}>
+            <div className={`flex items-center gap-2`}>
+                <p className={`text-neutral900 text-lg font-semibold `}>Average Mood</p>
+                <span className={`text-sm text-neutral600`}>(Last 5 Check-ins)</span>
+            </div>
+            <ReportCard
                 type="mood"
                 isEnoughData={isEnoughData}
-                currentAverageMood={currentAverageMood}
-                averageMoodTrend={averageMoodTrend}
+                moodReport={moodReport}
             />
-            <AverageScore
+            
+            <div className={`flex items-center gap-2`}>
+                <p className={`text-neutral900 text-lg font-semibold `}>Average Sleep</p>
+                <span className={`text-sm text-neutral600`}>(Last 5 Check-ins)</span>
+            </div>
+            <ReportCard
                 type="sleep"
                 isEnoughData={isEnoughData}
-                currentAverageSleep={currentAverageSleep}
-                averageSleepTrend={averageSleepTrend}
+                sleepReport={sleepReport}
             />
         </div>
     )
