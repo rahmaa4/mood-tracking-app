@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import type { MoodsData } from "../../../../../../utils/types";
+import type { MoodData } from "../../../../../../utils/types";
 import RadioButton from "../../../UI/RadioButton/RadioButton";
 import { CurrentMoodEntryContext } from "../../../../../../utils/contexts/CurrentMoodEntry/CurrentMoodEntry";
 
-export default function MoodOption({ moodData }: { moodData: MoodsData }) {
+export default function MoodOption({ moodData }: { moodData: MoodData }) {
   const [isActive, setIsActive] = useState(false);
   const { currentMood, setCurrentMood } = useContext(CurrentMoodEntryContext);
   
