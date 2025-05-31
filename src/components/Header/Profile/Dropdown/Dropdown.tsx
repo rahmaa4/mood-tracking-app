@@ -1,6 +1,4 @@
-import settingIcon from "/assets/images/icon-settings.svg";
-import logoutIcon from "/assets/images/icon-logout.svg";
-
+import DropdownLink from "./DropdownLink/DropdownLink"
 
 type DropdownProps = {
     isDropdown: boolean, 
@@ -21,32 +19,6 @@ export default function Dropdown({name, isDropdown, setIsDisplaySettings, setIsD
             <div className={`h-[1px] w-full bg-blue100`}></div>
             <DropdownLink type="settings" setIsDisplaySettings={setIsDisplaySettings} setIsDropdown={setIsDropdown} />
             <DropdownLink type="logout"/>
-        </div>
-    )
-}
-
-
-
-type DropdownLinkProps = {
-    type: "settings" | "logout",
-    setIsDisplaySettings?: React.Dispatch<React.SetStateAction<boolean>>,
-    setIsDropdown?: React.Dispatch<React.SetStateAction<boolean>> 
-}
-
-
-const DropdownLink = ({ type, setIsDisplaySettings, setIsDropdown }: DropdownLinkProps) => {
-    
-    const handleClick = () => {
-        if (type === "settings" && setIsDisplaySettings && setIsDropdown) {
-            setIsDropdown(false);
-            setIsDisplaySettings(true);
-        }
-    }
-    
-    return (
-        <div className={`flex gap-[10px] hover:cursor-pointer`} onClick={handleClick} >
-            <img className={`w-4 aspect-square`} src={type === "settings" ? settingIcon : logoutIcon} />
-            <p className={`text-[15px]`}>{type === "settings" ? 'Settings' : 'Logout'}</p>
         </div>
     )
 }

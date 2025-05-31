@@ -9,7 +9,9 @@ const options = {
     initialState: initialState,
     reducers: {
         loadEntries: (state:MoodEntries, action:PayloadAction<MoodEntries>) => {
-            return action.payload;
+            const updatedState = state.concat(action.payload);
+            return updatedState;
+            
         },
         addNewEntry: (state:MoodEntries, action:PayloadAction<Entry>) => { 
             state.push(action.payload);

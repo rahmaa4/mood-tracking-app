@@ -8,7 +8,8 @@ const options = {
     initialState: initialState, 
     reducers: {
         loadMoodQuotes: (state:MoodQuotes, action:PayloadAction<MoodQuotes>) => {
-            return action.payload;
+            state = action.payload;
+            return state;
         }
     }
 }

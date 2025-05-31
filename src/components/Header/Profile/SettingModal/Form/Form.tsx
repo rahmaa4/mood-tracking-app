@@ -28,13 +28,13 @@ export default function Form({userNameInput, userImageFile, handleUserNameInput,
                 />
             </div>
             <div className={`flex gap-5 mt-6`}>
-                <img src={userImageFile} className={`w-16 h-16`} />
+                <img src={userImageFile} className={`block w-16 aspect-square`} />
                 <div>
                     <div className={``}>
                         <p className={`mb-[3px]`}>Upload Image</p>
                         <p className={`text-neutral600 text-sm`}>Max 250KB, PNG or JPEG</p>
                     </div>
-                    <p id="error-message" className={`text-xs text-red700 my-3`}>{errorMessage}</p>
+                    <p className={`text-xs text-red700 my-3`}>{errorMessage}</p>
                     <input ref={inputRef} type="file" name="avatar" accept="image/png , image/jpeg" style={{ display: "none" }} onChange={handleUpload} />
                     <button className={`py-1 px-4 border border-neutral300 rounded-lg boxShadow hover:cursor-pointer`} onClick={handleClick} >Upload</button>
                 </div>
